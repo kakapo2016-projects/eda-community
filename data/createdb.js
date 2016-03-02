@@ -1,7 +1,7 @@
 var knex = require('knex')({
   client: 'sqlite3',
   connection: {
-    filename: './db/community.sqlite'
+    filename: './data/community.sqlite'
   },
   useNullAsDefault: true
 })
@@ -39,7 +39,7 @@ knex.raw(dropSqlUsers).then(function (resp) {
 	  knex.raw(dropSqlSkills).then(function (resp) {
 	  return knex.raw(createSqlSkills)
 	}).then(function (resp) {
-      knex.raw(dropSqlSkills).then(function (resp) {
+      knex.raw(dropSqlUserSkills).then(function (resp) {
   	  return knex.raw(createSqlUserSkills)
   	}).then(function (resp) {
   	  process.exit()
