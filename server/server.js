@@ -9,12 +9,28 @@ var session = require('express-session')
 var app = express() // create the express application
 var server = require('http').createServer(app) // create the server
 var routes = require('./routes')
+
+var GitHubStrategy = require('passport-github').Strategy;
 var exphbs  = require('express-handlebars')
 var path = require('path')
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 routes(app)
+
+passport.use(new GitHubStrategy({
+    clientID: process.env.Client_ID,
+    clientSecret: process.env.Client_Secret,
+    callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ githubId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+
+
 
 
 if (require.main === module) {
