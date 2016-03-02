@@ -2,6 +2,7 @@
 
 exports = module.exports = function (app) {
 
+
   var knex = require('knex')({
     client: 'sqlite3',
     connection: {
@@ -11,6 +12,12 @@ exports = module.exports = function (app) {
   })
 
   app.get('/', function (req, res) {
-  })
+      res.render('signup');
+  });
+
+
+
+
+
 
 }
