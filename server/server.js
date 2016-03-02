@@ -9,10 +9,14 @@ var session = require('express-session')
 var app = express() // create the express application
 var server = require('http').createServer(app) // create the server
 var routes = require('./routes')
+
 var GitHubStrategy = require('passport-github').Strategy;
+var exphbs  = require('express-handlebars')
+var path = require('path')
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 routes(app)
-
 
 passport.use(new GitHubStrategy({
     clientID: process.env.Client_ID,
@@ -34,3 +38,6 @@ if (require.main === module) {
     console.log('S-s-s-seeeerver is running on port 3000, go crazy teamo!')
   })
 }
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
