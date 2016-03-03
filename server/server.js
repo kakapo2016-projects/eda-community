@@ -45,7 +45,8 @@ routes(app)
 passport.use(new GitHubStrategy({
     clientID: process.env.Client_ID,
     clientSecret: process.env.Client_Secret,
-    callbackURL: "http://www.localhost:3000/auth/github/callback"
+    callbackURL: "http://www.localhost:3000/auth/github/callback",
+    "profileFields": ["email"]
   },
   function(accessToken, refreshToken, profile, cb) {
     knex('users').where({id: profile.id}).select('*').then(function (users) {
@@ -54,6 +55,7 @@ passport.use(new GitHubStrategy({
         console.log('This user already exists')
         return cb(null, user)
       } else {
+        console.log(profile)
         var newUser = { 
           accessToken: accessToken, 
           id: profile.id, 
@@ -64,7 +66,7 @@ passport.use(new GitHubStrategy({
         }
       
         knex('users').insert(newUser).then(function (insertedUser) {
-          console.log('New user created')
+          console.log('New user created', insertedUser)
           return cb(null, insertedUser)
         })
       }
@@ -73,7 +75,7 @@ passport.use(new GitHubStrategy({
 ))
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user);
 });
 
 passport.deserializeUser(function(id, done) {
