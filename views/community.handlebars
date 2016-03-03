@@ -1,14 +1,17 @@
 <div class="container">
-  <h1>EDA Community</h1>
   <div class="rowMasonry">
+  <div class="item logo">
+        <div class="well logo">
+          <img class="img-responsive" src="/img/dev-logo.png"  alt="dev-logo">
+        </div>
+      </div>
     {{#each user}}
       <div class="item" id="{{this.id}}">
         <div class="well">
           <img class="profileImage img-responsive img-circle" src="{{this.photoUrl}}"  alt="Smiley face">
           <h2>{{this.displayName}}</h2>
-          <p>{{this.email}} </p>
-          <p> github URL: {{this.profileUrl}} </p>
-
+          <p><b>Email</b> <br> <a href="mailto:{{this.email}}">{{this.email}}</a></p>
+          <p> <b>Github</b> <br> <a href="{{this.profileUrl}}">{{this.profileUrl}}</a> </p>
         </div>
       </div>
     {{/each}}
