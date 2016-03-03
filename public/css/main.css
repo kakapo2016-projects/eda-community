@@ -16,7 +16,7 @@ body {
 
 *, *:before, *:after {box-sizing:  border-box !important;}
 
-.row {
+.rowMasonry {
  -moz-column-width: 18em;
  -webkit-column-width: 18em;
  -moz-column-gap: 1em;
