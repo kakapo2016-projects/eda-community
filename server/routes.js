@@ -19,13 +19,13 @@ exports = module.exports = function (app) {
 
   app.get('/community', function (req, res) {
     knex('users').select('*').then(function(resp){
-      console.log(resp)
+      // console.log(resp)
       res.render('community', {user: resp});
     })
   });
 
 app.get('/auth/github',
-  passport.authenticate('github'));
+  passport.authenticate('github', { scope: ['email']}));
 
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/',
