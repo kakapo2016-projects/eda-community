@@ -27,11 +27,9 @@ exports = module.exports = function (app) {
 app.get('/auth/github',
   passport.authenticate('github'));
 
-app.get('/auth/github/callback',
-  passport.authenticate('github', {  successRedirect: '/community',
-                                                      failureRedirect: '/' }))
-
-
+app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/',
+  successRedirect: '/community' }))
 
   app.post('/info/:UserID', function(req, res){
     // save the extra info about this user back to the database
