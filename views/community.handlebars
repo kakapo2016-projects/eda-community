@@ -2,13 +2,13 @@
   <h1>EDA Community</h1>
   <div class="rowMasonry">
     {{#each user}}
-      <div class="item">
-        <div class="well"> 
-          {{this.id}}
-          {{this.displayName}}
-          {{this.profileUrl}}
-          {{this.email}}
-          {{this.photoUrl}}
+      <div class="item" id="{{this.id}}">
+        <div class="well">
+          <img class="profileImage img-responsive img-circle" src="{{this.photoUrl}}"  alt="Smiley face">
+          <h2>{{this.displayName}}</h2>
+          <p>{{this.email}} </p>
+          <p> github URL: {{this.profileUrl}} </p>
+
         </div>
       </div>
     {{/each}}
