@@ -9,29 +9,25 @@ var knex = require('knex')({
 // https://www.sqlite.org/lang_droptable.html
 var dropSqlUsers = 'DROP TABLE IF EXISTS users;'
 var dropSqlSkills = 'DROP TABLE IF EXISTS skills;'
-var dropSqlUserSkills = 'DROP TABLE IF EXISTS userskills;'
-
+var dropSqlUserSkills = 'DROP TABLE IF EXISTS skills;'
 
 var createSqlUsers = [
   'CREATE TABLE users (',
-	'UserID VARCHER(255) PRIMARY KEY ASC,',
-	'LastName VARCHER(255),',
-	'FirstName VARCHER(255),',
-	'Other VARCHER(255) );',
+	'id INTEGER PRIMARY KEY,',
+	'displayName VARCHAR(255),',
+      'photoUrl VARCHAR(255),',
+      'SkillID VARCHAR(255),',
+      'about VARCHAR,',
+	'profileUrl VARCHAR(255),',
+	'email VARCHAR(255) );',
 ].join(' ')
 
 var createSqlSkills = [
   'CREATE TABLE skills (',
-	'SkillID VARCHER(255) PRIMARY KEY ASC,',
-	'Description VARCHER(255));'
-].join(' ')
+	'id VARCHAR(255),',
+	'Description VARCHAR(255));'
 
-var createSqlUserSkills = [
-  'CREATE TABLE UserSkills (',
-	'UserID VARCHER(255) PRIMARY KEY ASC,',
-	'SkillID VARCHER(255));'
 ].join(' ')
-
 
 knex.raw(dropSqlUsers).then(function (resp) {
   return knex.raw(createSqlUsers)
@@ -40,7 +36,6 @@ knex.raw(dropSqlUsers).then(function (resp) {
 	  return knex.raw(createSqlSkills)
 	}).then(function (resp) {
       knex.raw(dropSqlUserSkills).then(function (resp) {
-  	  return knex.raw(createSqlUserSkills)
   	}).then(function (resp) {
   	  process.exit()
   	})
