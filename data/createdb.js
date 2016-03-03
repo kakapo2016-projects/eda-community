@@ -25,7 +25,7 @@ var createSqlUsers = [
 var createSqlSkills = [
   'CREATE TABLE skills (',
 	'id VARCHAR(255),',
-	'Description VARCHAR(255));'
+	'description VARCHAR(255));'
 
 ].join(' ')
 
