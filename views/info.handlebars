@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>EDA Community</h1>
+  <div class="moreInfo">
+    <div class="item">
+      <div class="user">
+        {{this.id}}
+        {{this.displayName}}
+      </div>
+      <form action="/info" method="post" >
+        <div id="about">
+          About me - <br>
+          <input type='text' name="about" ><br><br>
+        </div>
+        <div id="skills">
+          I have these skills - <br>
+          <input type='checkbox' name="skill1" >Javascript<br>
+          <input type='checkbox' name="skill2" >Node.js<br>
+          <input type='checkbox' name="skill3" >SQL<br>
+          <input type='checkbox' name="skill4" >Agile<br>
+          <input type='checkbox' name="skill5" >Other<br>
+        </div>
+        <div>
+          <input type="submit" value="Continue">
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
