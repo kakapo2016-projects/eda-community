@@ -1,4 +1,6 @@
 'use strict'
+var passport = require('passport')
+
 
 exports = module.exports = function (app) {
 
