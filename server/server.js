@@ -46,10 +46,11 @@ passport.use(new GitHubStrategy({
     clientID: process.env.Client_ID,
     clientSecret: process.env.Client_Secret,
     callbackURL: "http://www.localhost:3000/auth/github/callback",
-    "profileFields": ["email"]
+    "profileFields": ['emails']
   },
   function(accessToken, refreshToken, profile, cb) {
     knex('users').where({id: profile.id}).select('*').then(function (users) {
+      console.log(profile)
       var user = users[0]
       if (user) {
         console.log('This user already exists')
@@ -70,7 +71,7 @@ passport.use(new GitHubStrategy({
         }
       
         knex('users').insert(newUser).then(function (insertedUser) {
-          console.log('New user created', insertedUser)
+          console.log('New user created')
           return cb(null, insertedUser)
         })
       }
@@ -79,7 +80,6 @@ passport.use(new GitHubStrategy({
 ))
 
 passport.serializeUser(function(user, done) {
-  console.log("Passport Session", passport.session(user))
   done(null, user);
 });
 
