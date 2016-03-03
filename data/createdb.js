@@ -14,6 +14,7 @@ var dropSqlUserSkills = 'DROP TABLE IF EXISTS skills;'
 var createSqlUsers = [
   'CREATE TABLE users (',
 	'id INTEGER PRIMARY KEY,',
+      'accessToken VARCHAR(255),',
 	'displayName VARCHAR(255),',
       'photoUrl VARCHAR(255),',
       'SkillID VARCHAR(255),',

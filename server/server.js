@@ -38,17 +38,22 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://www.localhost:3000/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    var user = {id: profile.id, displayName: profile.displayName, profileUrl: profile.profileUrl, email: profile.emails[0].value, photoUrl: profile.photos[0].value}
-    knex('users').insert(user).then(function (resp) {
-      console.log('It worked!')
-    })
-    // var user = {profile.id, profile.displayName, profile.profileUrl, profile.emails[0].value, profile.photos[0].value}
-    // knex('users').insert()
-    // User.findOrCreate({ githubId: profile.id }, function (err, user) {
-    //   return cb(err, user);
-    // });
+    knex('users').where({id: profile.id}).select('*').then(function (user){
+      if (user === null) {
+        var user = {accessToken: accessToken, id: profile.id, displayName: profile.displayName, profileUrl: profile.profileUrl, email: profile.emails[0].value, photoUrl: profile.photos[0].value}
+        knex('users').insert(user).then(function (resp) {
+          console.log('New user created')
+          return cb(resp)
+      })
+      } else {
+        console.log('This user already exists')
+        return cb(user)
+      }
+      }
+    )
   }
-));
+))
+
 
 
 if (require.main === module) {
