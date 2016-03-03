@@ -20,13 +20,13 @@ var createSqlUsers = [
       'about VARCHAR,',
 	'profileUrl VARCHAR(255),',
 	'email VARCHAR(255) );',
+
 ].join(' ')
 
 var createSqlSkills = [
   'CREATE TABLE skills (',
 	'id VARCHAR(255),',
 	'description VARCHAR(255));'
-
 ].join(' ')
 
 knex.raw(dropSqlUsers).then(function (resp) {
