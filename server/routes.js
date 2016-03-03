@@ -18,11 +18,10 @@ exports = module.exports = function (app) {
   });
 
   app.get('/community', function (req, res) {
-    var user = [{'id': 12, displayName: 'rjoe19', profileUrl: 'www.google.com', email: 'rjoe@gmail.com', photoUrl: 'www.fillmurray.com/200/200'},
-    {'id': 12, displayName: 'rjoe19', profileUrl: 'www.google.com', email: 'rjoe@gmail.com', photoUrl: 'www.fillmurray.com/200/200'}]
-
-      res.render('community', {user: user});
-
+    knex('users').select('*').then(function(resp){
+      console.log(resp)
+      res.render('community', {user: resp});
+    })
   });
 
 app.get('/auth/github',
