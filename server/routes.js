@@ -18,16 +18,22 @@ exports = module.exports = function (app) {
   });
 
   app.get('/community', function (req, res) {
-    knex('users').select('*').then(function(resp){
-      // console.log(resp)
-      res.render('community', {user: resp});
+    //console.log(req.session.passport.user.id)
+    var userId = req.session.passport.user.id
+    knex('users').where('id', userId).select('*').then(function(resp){
+      console.log (resp)
+      if (resp[0].about === null){
+        res.render('info', {user: resp})
+      } else {
+        res.render('community', {user: resp});
+      }
     })
   });
 
 app.get('/auth/github',
   passport.authenticate('github', { scope: "user:email"}));
 
-app.get('/auth/github/callback', 
+app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/',
                                                       successRedirect: '/community'}))
 
