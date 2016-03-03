@@ -31,7 +31,7 @@ exports = module.exports = function (app) {
   });
 
 app.get('/auth/github',
-  passport.authenticate('github', { scope: ['email']}));
+  passport.authenticate('github', { scope: "user:email"}));
 
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/',
