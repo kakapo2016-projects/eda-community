@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>EDA Community</h1>
+  <div class="row">
+    {{#each user}}
+      <div class="item">
+        <div class="well"> 
+          {{this.id}}
+          {{this.displayName}}
+          {{this.profileUrl}}
+          {{this.email}}
+          {{this.photoUrl}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

@@ -17,6 +17,13 @@ exports = module.exports = function (app) {
       res.render('signup');
   });
 
+  app.get('/community', function (req, res) {
+    knex('users').select('*').then(function(resp){
+      console.log(resp)
+      res.render('community', {user: resp});
+    })
+  });
+
 app.get('/auth/github',
   passport.authenticate('github'));
 
