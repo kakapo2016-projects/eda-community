@@ -55,13 +55,17 @@ passport.use(new GitHubStrategy({
         console.log('This user already exists')
         return cb(null, user)
       } else {
-        console.log(profile)
+        if (typeof(profile.emails) === 'undefined') {
+          var email = "Private" 
+        } else {
+          var email = profile.emails[0].value
+        }
         var newUser = { 
           accessToken: accessToken, 
           id: profile.id, 
           displayName: profile.displayName, 
           profileUrl: profile.profileUrl, 
-          email: profile.emails[0].value, 
+          email: email, 
           photoUrl: profile.photos[0].value
         }
       
@@ -75,6 +79,7 @@ passport.use(new GitHubStrategy({
 ))
 
 passport.serializeUser(function(user, done) {
+  console.log("Passport Session", passport.session(user))
   done(null, user);
 });
 

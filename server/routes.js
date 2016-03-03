@@ -29,7 +29,7 @@ app.get('/auth/github',
 
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/',
-  successRedirect: '/community' }))
+                                                      successRedirect: '/community'}))
 
   app.post('/info/:UserID', function(req, res){
     // save the extra info about this user back to the database
