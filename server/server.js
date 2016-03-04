@@ -45,7 +45,7 @@ routes(app)
 passport.use(new GitHubStrategy({
     clientID: process.env.Client_ID,
     clientSecret: process.env.Client_Secret,
-    callbackURL: "http://www.localhost:3000/auth/github/callback",
+    callbackURL: "http://eda-community.herokuapp.com/auth/github/callback",
     "profileFields": ['emails']
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -92,7 +92,7 @@ passport.deserializeUser(function(id, done) {
 
 
 if (require.main === module) {
-  server.listen(3000, function () {
+  server.listen(8080, function () {
     console.log('S-s-s-seeeerver is running on port 3000, go crazy teamo!')
   })
 }
