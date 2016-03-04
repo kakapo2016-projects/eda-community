@@ -22,9 +22,9 @@ exports = module.exports = function (app) {
     var userId = req.session.passport.user.id
     knex('users').select('*').then(function(resp){
       knex('users').where('id', userId).select('*').then(function(respo){
-        var user = resp[0]
+        var user = respo[0]
         if (user){
-          if (resp[0].about === null){
+          if (respo[0].about === null){
             res.render('info', {user: resp})
           } else {
             res.render('community', {user: resp});
