@@ -92,9 +92,8 @@ passport.deserializeUser(function(id, done) {
 
 
 if (require.main === module) {
-  server.listen(8080, function () {
-    console.log('S-s-s-seeeerver is running on port 3000, go crazy teamo!')
+  var port = process.env.PORT || 5000
+  server.listen(port, function () {
+    console.log('S-s-s-seeeerver is running on port 8080, go crazy teamo!')
   })
 }
-
-
