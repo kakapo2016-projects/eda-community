@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "createdb": "babel-node ./data/createdb.js",
-    "start": "nodemon ./server/server.js"
+    "createdb": "node ./data/createdb.js",
+    "start": "node ./server/server.js",
+    "preinstall": "npm run createdb"
   },
   "repository": {
     "type": "git",
