@@ -37,22 +37,34 @@ app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/',
                                                       successRedirect: '/community'}))
 
-  app.post('/info/:UserID', function(req, res){
+  app.post('/info', function(req, res){
     // save the extra info about this user back to the database
-     knex('users').insert({
-       id: UserID,
-       about: req.body.about,
+    console.log("attempting to post", req.body)
+    var userId = req.session.passport.user.id
+
+     knex('users')
+     .where('id', userId)
+     .update({
+      //  id: userId,
+      //  accessToken: undefined,
+      //  displayName: undefined,
+      //  photoUrl: undefined,
+      //  SkillID: undefined
+       about: req.body.name,
+      //  profileUrl: undefined,
+      //  email: undefined
      }) .then (function(resp){
-       var rows = [{id: UserID, skillDescr: req.body.skill[0]},
-        {id: UserID, description: req.body.skill[1]},
-        {id: UserID, description: req.body.skill[2]},
-        {id: UserID, description: req.body.skill[3]},
-        {id: UserID, description: req.body.skill[4]}];
-        var chunkSize = 5;
-        knex.batchInsert('skills', rows, chunkSize)
-        .then(function(respo) {
+      //  var rows = [{id: userId, skillDescr: req.body.Javascript},
+      //   {id: userId, description: req.body.Node},
+      //   {id: userId, description: req.body.SQL},
+      //   {id: userId, description: req.body.Agile},
+      //   {id: userId, description: req.body.Ruby},
+      //   {id: userId, description: req.body.Python}];
+      //   var chunkSize = 6;
+      //   knex.batchInsert('skills', rows, chunkSize)
+      //   .then(function(respo) {
           res.redirect('/community')
-        })
+        // })
        })
      })
 
