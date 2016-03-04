@@ -50,3 +50,16 @@ body {
 .logo.well {
   padding: 0;
 }
+
+.boxes {
+  text-align: left;
+}
+
+.infoBox {
+padding-left: 30px;
+padding-right: 30px;
+}
+
+#name {
+  height: 100px;
+}
